@@ -1,9 +1,27 @@
+import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
-export const App = () => {
-  return (
-    <>
-      <p>Hello world!</p>
-      <GlobalStyle />
-    </>
-  );
+
+import SearchBar from './Searchbar';
+
+
+class App extends Component {
+  state = {
+    searchQuery: '',
+  };
+
+  handleSubmit = searchQuery => {
+    this.setState({ searchQuery });
+  };
+
+  render() { 
+    const onSubmit = this.handleSubmit;
+    return (
+      <>
+        <SearchBar onSubmit={onSubmit} />
+        <GlobalStyle />
+      </>
+    );
+  }    
 };
+
+export default App;
