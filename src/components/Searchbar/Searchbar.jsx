@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 
 class SearchBar extends Component {
@@ -12,8 +13,8 @@ class SearchBar extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.searchQuery.trim() === '') {        
-        alert('This field can`t be empty');
+    if (this.state.searchQuery.trim() === '') {
+      alert('This field can`t be empty');
     }
     this.props.onSubmit(this.state.searchQuery);
     this.setState({ searchQuery: '' });
@@ -42,5 +43,9 @@ class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default SearchBar;

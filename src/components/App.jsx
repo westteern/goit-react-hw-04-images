@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 
 import SearchBar from './Searchbar';
+import ImageGallery from './ImageGallery';
 
 
 class App extends Component {
@@ -15,9 +16,11 @@ class App extends Component {
 
   render() { 
     const onSubmit = this.handleSubmit;
+    const searchQuery = this.state.searchQuery;
     return (
       <>
         <SearchBar onSubmit={onSubmit} />
+        <ImageGallery searchQuery={searchQuery} />
         <GlobalStyle />
       </>
     );
