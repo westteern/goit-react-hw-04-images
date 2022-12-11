@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { GalleryGrid } from './ImageGallery.styled';
 
 import fetchImage from 'api/fatchImages';
 import ImageGalleryItem from 'components/ImageGalleryItem';
@@ -47,11 +48,12 @@ class ImageGallery extends Component {
   };
 
   render() {
-    const { images, loading } = this.state;
+    const { images, loading, page } = this.state;
+    const onLoadMore = this.onLoadMore;
     return (
       <>
-        {this.state.loading && <Loader />}
-        <ul>
+        {page === 1 && loading && <Loader />}
+        <GalleryGrid>
           {images.map(({ id, webformatURL, largeImageURL, tags }) => (
             <ImageGalleryItem
               key={id}
@@ -60,10 +62,11 @@ class ImageGallery extends Component {
               tag={tags}
             />
           ))}
-        </ul>
+        </GalleryGrid>
         {images.length !== 0 && !loading && (
-          <Button loadMore={this.onLoadMore}></Button>
+          <Button loadMore={onLoadMore}></Button>
         )}
+        {page > 1 && loading && <Loader />}
       </>
     );
   }

@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
+import { LoadMoreBtn } from './Button.styled';
 
 const Button = ({ loadMore }) => {
   return (
     <>
-      <button
+      <LoadMoreBtn
         type="button"
         onClick={() => {
           loadMore();
         }}
       >
         Load more
-      </button>
+      </LoadMoreBtn>
     </>
   );
 };
