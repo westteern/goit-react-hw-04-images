@@ -15,9 +15,9 @@ class SearchBar extends Component {
     e.preventDefault();
     if (this.state.searchQuery.trim() === '') {
       alert('This field can`t be empty');
+      return;
     }
     this.props.onSubmit(this.state.searchQuery);
-    this.setState({ searchQuery: '' });
   };
 
   render() {
