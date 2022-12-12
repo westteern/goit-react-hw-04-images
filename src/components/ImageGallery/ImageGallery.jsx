@@ -22,7 +22,7 @@ class ImageGallery extends Component {
     const prevQuery = prevProps.searchQuery;
     const prevPage = prevState.page;
     const updatePage = prevQuery !== searchQuery ? 1 : page;
-    if (prevQuery !== searchQuery || prevPage !== page) {
+    if (prevQuery !== searchQuery || prevPage < page) {
       try {
         this.setState({ loading: true });
         const updateData = await fetchImage(searchQuery, updatePage);
