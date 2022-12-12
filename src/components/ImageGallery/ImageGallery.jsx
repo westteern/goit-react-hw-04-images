@@ -13,6 +13,7 @@ class ImageGallery extends Component {
     images: [],
     page: 1,
     loading: false,
+    totalImages: null,
   };
 
   componentDidUpdate = async (prevProps, prevState) => {
@@ -26,12 +27,17 @@ class ImageGallery extends Component {
         this.setState({ loading: true });
         const updateData = await fetchImage(searchQuery, updatePage);
         const newImages = await updateData.hits;
-        if (newImages.length === 0) {
+        const totalImages = await updateData.totalHits;
+        if (newImages.length === 0 && totalImages === 0) {
           toast.info('No image found. Refine the search parameters.');
-          this.setState({ loading: false });
         }
-        if (prevQuery !== searchQuery) {
-          this.setState({ images: newImages, page: 1 });
+        if (prevQuery !== searchQuery && totalImages !== 0) {
+          toast.success(`We found ${totalImages} pictures for your request!`);
+          this.setState({
+            images: newImages,
+            page: 1,
+            totalImages: totalImages,
+          });
           this.goToTop();
         }
         if (prevPage !== page && page !== 1) {
@@ -61,14 +67,14 @@ class ImageGallery extends Component {
   goToNextPage = () => {
     setTimeout(() => {
       window.scrollBy({
-        top: 500,
+        top: window.innerHeight - 165,
         behavior: 'smooth',
       });
     }, 0);
   };
 
   render() {
-    const { images, loading, page } = this.state;
+    const { images, loading, page, totalImages } = this.state;
     const onLoadMore = this.onLoadMore;
     return (
       <>
@@ -83,7 +89,7 @@ class ImageGallery extends Component {
             />
           ))}
         </GalleryGrid>
-        {images.length !== 0 && !loading && (
+        {images.length !== 0 && images.length !== totalImages && !loading && (
           <Button loadMore={onLoadMore}></Button>
         )}
         {page > 1 && loading && <Loader />}
