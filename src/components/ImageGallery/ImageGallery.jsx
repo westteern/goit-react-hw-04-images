@@ -26,8 +26,8 @@ class ImageGallery extends Component {
       try {
         this.setState({ loading: true });
         const updateData = await fetchImage(searchQuery, updatePage);
-        const newImages = await updateData.hits;
-        const totalImages = await updateData.totalHits;
+        const newImages = updateData.hits;
+        const totalImages = updateData.totalHits;
         if (newImages.length === 0 && totalImages === 0) {
           toast.info('No image found. Refine the search parameters.');
         }
@@ -54,7 +54,7 @@ class ImageGallery extends Component {
   };
 
   onLoadMore = () => {
-    this.setState({ page: this.state.page + 1 });
+    this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
   goToTop = () => {
