@@ -1,6 +1,9 @@
 import PropTypes from 'prop-types';
 import { Component } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BiSearch } from 'react-icons/bi';
+
 import {
   SearchbarHeader,
   SearchForm,
@@ -21,7 +24,7 @@ class SearchBar extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.searchQuery.trim() === '') {
-      alert('This field can`t be empty');
+      toast.info('This field can`t be empty');
       return;
     }
     this.props.onSubmit(this.state.searchQuery);

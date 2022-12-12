@@ -16,10 +16,8 @@ export default async function fetchImage(userInput, pageNumber) {
         per_page: '12',
       },
     });
-      return await responce.data;      
+    return await responce.data;
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 }
-
-

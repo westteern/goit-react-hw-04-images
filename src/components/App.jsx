@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import { ContainerApp } from './App.styled';
+import { ToastContainer } from 'react-toastify';
 
 import SearchBar from './Searchbar';
 import ImageGallery from './ImageGallery';
@@ -21,6 +22,7 @@ class App extends Component {
       <ContainerApp>
         <SearchBar onSubmit={onSubmit} />
         <ImageGallery searchQuery={searchQuery} />
+        <ToastContainer autoClose={3000} />
         <GlobalStyle />
       </ContainerApp>
     );

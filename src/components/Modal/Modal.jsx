@@ -26,9 +26,11 @@ export default class Modal extends Component {
   };
 
   render() {
+    const onBackDropClick = this.onBackDropClick;
+    const children = this.props.children;
     return createPortal(
-      <Overlay onClick={this.onBackDropClick}>
-        <ModalWindow>{this.props.children}</ModalWindow>
+      <Overlay onClick={onBackDropClick}>
+        <ModalWindow>{children}</ModalWindow>
       </Overlay>,
       modalRoot
     );

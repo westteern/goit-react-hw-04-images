@@ -6,6 +6,7 @@ import fetchImage from 'api/fatchImages';
 import ImageGalleryItem from 'components/ImageGalleryItem';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
+import { toast } from 'react-toastify';
 
 class ImageGallery extends Component {
   state = {
@@ -26,17 +27,20 @@ class ImageGallery extends Component {
         const updateData = await fetchImage(searchQuery, updatePage);
         const newImages = await updateData.hits;
         if (newImages.length === 0) {
-          alert('No image found. Refine the search parameters.');
+          toast.info('No image found. Refine the search parameters.');
           this.setState({ loading: false });
         }
         if (prevQuery !== searchQuery) {
           this.setState({ images: newImages, page: 1 });
+          this.goToTop();
         }
         if (prevPage !== page && page !== 1) {
           this.setState({ images: [...this.state.images, ...newImages] });
+          this.goToNextPage();
         }
       } catch (error) {
         console.log(error);
+        toast.error('Oops! Something is wrong. Try reloading the page');
       } finally {
         this.setState({ loading: false });
       }
@@ -45,6 +49,22 @@ class ImageGallery extends Component {
 
   onLoadMore = () => {
     this.setState({ page: this.state.page + 1 });
+  };
+
+  goToTop = () => {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  goToNextPage = () => {
+    setTimeout(() => {
+      window.scrollBy({
+        top: 500,
+        behavior: 'smooth',
+      });
+    }, 0);
   };
 
   render() {
