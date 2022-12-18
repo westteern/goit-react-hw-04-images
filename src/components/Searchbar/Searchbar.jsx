@@ -26,7 +26,6 @@ const SearchBar = ({ onSubmit }) => {
       return;
     }
     onSubmit(searchQuery);
-    setsearchQuery('');
   };
 
   return (
