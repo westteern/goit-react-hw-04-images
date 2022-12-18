@@ -20,26 +20,3 @@ const App = () => {
 };
 
 export default App;
-
-// class App extends Component {
-//   state = {
-//     searchQuery: '',
-//   };
-
-//   handleSubmit = searchQuery => {
-//     this.setState({ searchQuery });
-//   };
-
-//   render() {
-//     const onSubmit = this.handleSubmit;
-//     const searchQuery = this.state.searchQuery;
-//     return (
-//       <ContainerApp>
-//         <SearchBar onSubmit={onSubmit} />
-//         <ImageGallery searchQuery={searchQuery} />
-//         <ToastContainer autoClose={3000} />
-//         <GlobalStyle />
-//       </ContainerApp>
-//     );
-//   }
-// }
